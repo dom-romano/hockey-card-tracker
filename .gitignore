@@ -1,1 +1,4 @@
 .venv/
+personal_scripts/
+*.csv
+*.xlsx

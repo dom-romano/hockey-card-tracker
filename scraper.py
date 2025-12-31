@@ -2,6 +2,8 @@ import pandas as pd
 import time
 from playwright.sync_api import sync_playwright
 
+collection = pd.read_csv("data\\cleaned_collection.csv")
+
 def scrape_130point(search_query):
     with sync_playwright() as p:
         # Launch browser (headless=False lets you watch it work)
@@ -54,6 +56,7 @@ def scrape_130point(search_query):
         else:
             print("No data found. Try a different search query.")
 
-if __name__ == "__main__":
-    # Your target card
-    scrape_130point("2025-26 Pokemon Scarlet & Violet #SV001 Charizard VMAX")
+for index, row in collection.iterrows():
+    search_query = f"{row['Year']} {row['Brand']} {row['Set']} {row['Card_Number']} {row['Player']}"
+    scrape_130point(search_query)
+    time.sleep(5)  # Pause between requests to avoid overwhelming the serverw
