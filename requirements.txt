@@ -1,0 +1,11 @@
+# --- DATA & DATABASE ---
+pandas>=2.0.0
+openpyxl>=3.1.0
+sqlite3
+
+# --- SCRAPING & AUTOMATION ---
+playwright>=1.40.0     # The engine for 130point navigation
+# Note: After installing, run 'playwright install' to set up browser binaries
+
+# --- UTILITIES ---
+python-dotenv>=1.0.0
