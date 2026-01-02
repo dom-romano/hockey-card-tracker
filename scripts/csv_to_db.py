@@ -25,9 +25,3 @@ with open(csv, "r", encoding="utf-8") as f:
         quantity = int(parts[7].strip())
 
         card_id = f"{year}_{brand}_{set_name}_{card_number}_{player_name}".replace(" ", "_").lower()
-
-        
-        cursor.execute("""
-            INSERT OR IGNORE INTO cards (card_id, player_name, team, year, card_number)
-            VALUES (?, ?, ?, ?, ?)
-        """, (card_id, player_name, team, year, card_number))
