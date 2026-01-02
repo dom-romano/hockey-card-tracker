@@ -1,6 +1,7 @@
 import pandas as pd
 import time
 from playwright.sync_api import sync_playwright
+import sqlite3
 
 collection = pd.read_csv("data\\cleaned_collection.csv")
 
@@ -51,12 +52,12 @@ def scrape_130point(search_query):
             df = pd.DataFrame(card_data)
             print("Success! Scraped Data:")
             print(df.head())
-            df.to_csv("true_market_prices.csv", index=False)
+            
             print(f"Saved {len(df)} sales to true_market_prices.csv")
         else:
             print("No data found. Try a different search query.")
 
 for index, row in collection.iterrows():
-    search_query = f"{row['Year']} {row['Brand']} {row['Set']} {row['Card_Number']} {row['Player']}"
+    search_query = f"{row['Year']} {row['Brand']} {row['Set']} {row['Card_Number']} {row['Player']} {row['Parallel']}"
     scrape_130point(search_query)
-    time.sleep(5)  # Pause between requests to avoid overwhelming the serverw
+    time.sleep(5)  # Pause between requests to avoid overwhelming the server
