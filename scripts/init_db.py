@@ -1,7 +1,7 @@
 import sqlite3
 
 def create_database():
-    conn = sqlite3.connect('data\\value_history.db')
+    conn = sqlite3.connect('hockey-card-tracker/hockey-card-tracker/value_history.db')
     cursor = conn.cursor()
 
     cursor.execute('''
@@ -10,8 +10,7 @@ def create_database():
             year TEXT,
             set_name TEXT,
             card_name TEXT,
-            parallel TEXT DEFAULT 'Base',
-            insert_set TEXT,
+            parallel_insert TEXT DEFAULT 'Base',
             quantity INTEGER DEFAULT 1,
             is_graded BOOLEAN,
             grader TEXT,
