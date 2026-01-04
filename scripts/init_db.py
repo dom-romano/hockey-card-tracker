@@ -5,11 +5,15 @@ def create_database():
     cursor = conn.cursor()
 
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS card (
-            card_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        CREATE TABLE IF NOT EXISTS cards (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            card_id TEXT UNIQUE,
+            card_number TEXT,
             year TEXT,
+            brand TEXT,
             set_name TEXT,
             card_name TEXT,
+            team TEXT,
             parallel_insert TEXT DEFAULT 'Base',
             quantity INTEGER DEFAULT 1,
             is_graded BOOLEAN,
