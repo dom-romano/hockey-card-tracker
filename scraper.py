@@ -3,7 +3,10 @@ import time
 from playwright.sync_api import sync_playwright
 import sqlite3
 
-collection = pd.read_csv("data\\cleaned_collection.csv")
+conn = sqlite3.connect('value_history.db')
+cursor = conn.cursor()
+
+collection = cursor.execute("SELECT * FROM cards").fetchall()
 
 def scrape_130point(search_query):
     with sync_playwright() as p:
@@ -46,18 +49,10 @@ def scrape_130point(search_query):
                 continue
 
         browser.close()
-        
-        # 4. Save to CSV
-        if card_data:
-            df = pd.DataFrame(card_data)
-            print("Success! Scraped Data:")
-            print(df.head())
-            
-            print(f"Saved {len(df)} sales to true_market_prices.csv")
-        else:
-            print("No data found. Try a different search query.")
+        print(card_data)
 
-for index, row in collection.iterrows():
-    search_query = f"{row['Year']} {row['Brand']} {row['Set']} {row['Card_Number']} {row['Player']} {row['Parallel']}"
+
+for row in collection:
+    search_query = f"{row[2]} {row[3]} {row[4]} {row[5]} {row[6]} {row[7]} {row[8]}"
     scrape_130point(search_query)
     time.sleep(5)  # Pause between requests to avoid overwhelming the server
