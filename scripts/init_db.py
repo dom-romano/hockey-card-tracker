@@ -1,7 +1,11 @@
 import sqlite3
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 def create_database():
-    conn = sqlite3.connect('hockey-card-tracker/hockey-card-tracker/value_history.db')
+    conn = sqlite3.connect(os.getenv("DATABASE_PATH"))
     cursor = conn.cursor()
 
     cursor.execute('''

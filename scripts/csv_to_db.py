@@ -1,6 +1,11 @@
 import sqlite3
+#import env
+import os
+from dotenv import load_dotenv
 
-db = sqlite3.connect("hockey-card-tracker/hockey-card-tracker/value_history.db")
+load_dotenv()
+
+db = sqlite3.connect(os.getenv("DATABASE_PATH"))
 csv = "hockey-card-tracker/hockey-card-tracker/data/cleaned_collection.csv"
 
 cursor = db.cursor()

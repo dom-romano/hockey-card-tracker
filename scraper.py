@@ -2,8 +2,12 @@ import pandas as pd
 import time
 from playwright.sync_api import sync_playwright
 import sqlite3
+import os
+from dotenv import load_dotenv
 
-conn = sqlite3.connect('value_history.db')
+load_dotenv()
+
+conn = sqlite3.connect(os.getenv("DATABASE_PATH"))
 cursor = conn.cursor()
 
 collection = cursor.execute("SELECT * FROM cards").fetchall()
